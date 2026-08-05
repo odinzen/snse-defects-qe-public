@@ -9,9 +9,9 @@ host corners:
     Se-rich:  Delta_mu_Se = 0,          Delta_mu_Sn = DeltaH_f
 
 Oxygen is the third axis. Delta_mu_O <= 0 (referenced to 1/2 E(O2)); Delta_mu_O = 0 is the nominal
-O-rich reference. The realized Delta_mu_O(fO2, T) comes from the workspace CALPHAD oxygen buffer, and
-the thermodynamic upper cap is actually set by the onset of Sn/Se oxide formation (SnO2, SnO, SeO2) -
-neither of which is computed here, so O-rich = 0 is a labelled reference, not a hard cap.
+O-rich reference. The realized Delta_mu_O(fO2, T) comes from gas-phase O2 thermochemistry (NIST-JANAF;
+see oxygen.py), and the thermodynamic upper cap is set by the onset of Sn/Se oxide formation (SnO2,
+SnO, SeO2) - not computed here, so O-rich = 0 is a labelled reference, not a hard cap.
 
 Delta_mu here is referenced to the elemental DFT energies in `mu_elem` (eV/atom); the full potential
 used in a formation energy is mu_i = mu_elem_i + Delta_mu_i.

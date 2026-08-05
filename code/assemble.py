@@ -5,9 +5,9 @@ applies the image-charge correction, and writes the py-sc-fermi dataset JSON + t
 
 The DFT side is complete: true VBM (fixed-occupation SCF) and elemental chemical-potential references
 are both in. Chemical potentials are bounded by the SnSe formation enthalpy (Sn-rich / Se-rich host
-corners) and the gap is scissored to experiment. The one external axis still open is the realized
-oxygen chemical potential Delta_mu_O(fO2, T) from the workspace CALPHAD buffer; O-rich (Delta_mu_O=0)
-is used here as the labelled reference.
+corners) and the gap is scissored to experiment. This dataset holds oxygen at the O-rich reference
+(Delta_mu_O=0); the realized Delta_mu_O(fO2, T) from gas-phase O2 thermochemistry (oxygen.py) is
+applied in the carrier-model sweep.
 """
 
 from __future__ import annotations
@@ -30,8 +30,8 @@ def main() -> None:
     chempot = {
         "formation_enthalpy_SnSe_eV_per_fu": round(dHf, 4),
         "host_limits_delta_mu_eV": {k: {s: round(v, 4) for s, v in d.items()} for k, d in limits.items()},
-        "oxygen_reference": "Delta_mu_O = 0 (O-rich); realized value from the CALPHAD fO2,T buffer, "
-                            "hard cap set by Sn/Se oxide onset (not computed here)",
+        "oxygen_reference": "Delta_mu_O = 0 (O-rich); realized value from gas-phase O2 (fO2,T) "
+                            "thermochemistry, hard cap set by Sn/Se oxide onset",
         "band_gap_eV": {"pbe": pbe_gap, "scissored": gap},
         "elemental_mu_eV_per_atom": {k: round(v, 4) for k, v in mu.items()},
     }
@@ -42,7 +42,7 @@ def main() -> None:
         "vbm_note": "true VBM 7.4950 eV (fixed-occupation bulk SCF)",
         "mu_note": "elemental refs + host bounds from DeltaH_f(SnSe); O held at the O-rich reference",
         "gap_note": f"scissored to experiment {gap} eV (PBE {pbe_gap} eV); levels stay VBM-referenced",
-        "open": "realized Delta_mu_O(fO2,T) from the workspace CALPHAD oxygen buffer",
+        "open": "realized Delta_mu_O(fO2,T) from gas-phase O2 thermochemistry, applied in the carrier-model sweep",
     }
     out_json = write_dataset(ds, mu, REPO / "data" / "defect_formation_dataset.json",
                              provisional=True, provenance=prov, chempot=chempot)
@@ -73,8 +73,8 @@ def main() -> None:
         png = plot_formation_diagram(ds, mu_c, REPO / "data" / f"defect_diagram_{corner}.png")
         print(f"wrote {png.relative_to(REPO)}")
 
-    print("\nSTILL OPEN (external, no Sol): realized Delta_mu_O(fO2,T) from the workspace CALPHAD "
-          "oxygen buffer -> the carrier-model sweep over fO2 and T.")
+    print("\nNEXT (no Sol): realized Delta_mu_O(fO2,T) from gas-phase O2 thermochemistry "
+          "-> the carrier-model sweep over fO2 and T.")
 
 
 if __name__ == "__main__":

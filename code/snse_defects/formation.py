@@ -5,11 +5,11 @@
 n_i is the number of atoms of species i ADDED to the perfect cell (negative if removed): V_Sn has
 n_Sn = -1, O_i has n_O = +1, O_Se has n_O = +1 and n_Se = -1.
 
-mu is deliberately NOT baked in. The chemical potentials come from the CALPHAD oxygen-buffer axis in
-the main workspace (Sn-rich / Se-rich bounds, and mu_O as a function of fO2 and T), so we store the
-mu-independent part plus the n_i coefficients and let the carrier model sweep conditions without
-touching DFT again. Until the real mu table arrives, `elemental_placeholder` gives a clearly-labelled
-provisional reference so nothing silently passes for a final number.
+mu is deliberately NOT baked in. The chemical potentials are set outside DFT - Sn-rich / Se-rich
+bounds from the SnSe formation enthalpy (chempot.py) and mu_O(fO2, T) from gas-phase O2
+thermochemistry (oxygen.py) - so we store the mu-independent part plus the n_i coefficients and let
+the carrier model sweep conditions without touching DFT again. `elemental_placeholder` gives a
+clearly-labelled zero reference for scaffolding, so nothing silently passes for a final number.
 """
 
 from __future__ import annotations
@@ -113,7 +113,8 @@ def build(
 def elemental_placeholder() -> dict[str, float]:
     """PROVISIONAL chemical potentials (zero reference). Not physical - a scaffold only.
 
-    Every number produced with these is provisional. Replace with the CALPHAD oxygen-buffer values
-    (Sn-rich and Se-rich bounds, mu_O(fO2, T)) before any result is reported.
+    Every number produced with these is provisional. Replace with the physical chemical potentials
+    (Sn-rich / Se-rich bounds from DeltaH_f(SnSe), mu_O(fO2, T) from gas-phase O2) before any result
+    is reported.
     """
     return {"Sn": 0.0, "Se": 0.0, "O": 0.0}

@@ -1,6 +1,6 @@
 """Robustness of the SnSe:O carrier conclusions to the model's single-point assumptions.
 
-The CALPHAD reject warned against a conclusion that rests on one under-constrained choice. Here we
+A robust conclusion must not rest on one under-constrained choice. Here we
 test whether "SnSe is p-type, p ~ 1e17-1e19, V_Sn-controlled" survives varying the three softest
 inputs: the gap scissor, the site multiplicity (dilute prefactor), and the host corner. A robust
 result should not flip type or swing the hole density by more than about an order of magnitude.

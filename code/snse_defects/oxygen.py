@@ -9,9 +9,9 @@ DFT O2 total energy so it drops straight into the defect formation energies:
 with H(T), S(T) from the NIST-JANAF O2 Shomate fit (100-2000 K) and H(298.15)-H(0) = 8.683 kJ/mol.
 Delta_mu_O = 0 is the O-rich reference (T -> 0 / infinite pressure); real conditions give < 0.
 
-This is the standard gas-phase reference; it can be swapped for the workspace CALPHAD oxygen buffer
-if a more integrated Sn-Se-O treatment is wanted. Shomate coefficients transcribed from the NIST
-WebBook and verified in _selftest() against tabulated S(298), Cp(298).
+This is the standard gas-phase (ab-initio-thermodynamics) reference for the oxygen axis. Shomate
+coefficients transcribed from the NIST WebBook and verified in _selftest() against tabulated
+S(298), Cp(298).
 """
 
 from __future__ import annotations

@@ -35,8 +35,9 @@ def write_dataset(
         "description": "Charged point-defect formation energies for O in SnSe (QE, PBE-D3).",
         "provisional": provisional,
         "provisional_reason": (
-            "host bounds + true VBM + scissored gap are in; the realized oxygen potential "
-            "Delta_mu_O(fO2,T) from the CALPHAD buffer is the one axis still to be applied"
+            "host bounds + true VBM + scissored gap are in; this dataset holds oxygen at the O-rich "
+            "reference, and the realized Delta_mu_O(fO2,T) from gas-phase O2 (NIST-JANAF) is "
+            "applied in the carrier-model sweep"
             if provisional
             else None
         ),
