@@ -46,9 +46,10 @@ def main() -> None:
     ax.set_xlabel(r"oxygen chemical potential  $\Delta\mu_\mathrm{O}$  (eV)")
     ax.set_ylabel(r"carrier concentration (cm$^{-3}$)")
 
-    # region + marker labels only (no finding sentence)
-    ax.text(0.30, 0.95, r"$p$-type from $V_\mathrm{Sn}$", transform=ax.transAxes,
-            ha="left", va="top", fontsize=11)
+    # region + marker labels only (no finding sentence); placed in the clear band
+    # between the p and n curves so it never overlaps a curve or the cap line
+    ax.text(0.42, 0.70, r"$p$-type from $V_\mathrm{Sn}$", transform=ax.transAxes,
+            ha="left", va="center", fontsize=11)
     ax.annotate(r"SnO$_2$ cap", xy=(cap_exp, 1.5e7), xytext=(cap_exp + 0.10, 6e8),
                 fontsize=8.5, arrowprops=dict(arrowstyle="->", color="0.4", lw=0.9))
     ax.annotate("oxidation", xy=(max(x) - 0.05, 1.5e7), xytext=(max(x) - 0.55, 6e8),
