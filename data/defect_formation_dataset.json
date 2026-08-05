@@ -1,0 +1,221 @@
+{
+  "description": "Charged point-defect formation energies for O in SnSe (QE, PBE-D3).",
+  "provisional": true,
+  "provisional_reason": "host bounds + true VBM + scissored gap are in; the realized oxygen potential Delta_mu_O(fO2,T) from the CALPHAD buffer is the one axis still to be applied",
+  "reference": {
+    "bulk_energy_eV": -99404.09924077439,
+    "vbm_eV": 7.495,
+    "band_gap_eV": 0.86,
+    "volume_A3": 1983.8113323160214
+  },
+  "chemical_potentials_eV": {
+    "Sn": -2166.857517517756,
+    "Se": -593.4319049231456,
+    "O": -564.9098368609567
+  },
+  "chemical_potential_limits": {
+    "formation_enthalpy_SnSe_eV_per_fu": -0.9356,
+    "host_limits_delta_mu_eV": {
+      "Sn-rich": {
+        "Sn": 0.0,
+        "Se": -0.9356
+      },
+      "Se-rich": {
+        "Sn": -0.9356,
+        "Se": 0.0
+      }
+    },
+    "oxygen_reference": "Delta_mu_O = 0 (O-rich); realized value from the CALPHAD fO2,T buffer, hard cap set by Sn/Se oxide onset (not computed here)",
+    "band_gap_eV": {
+      "pbe": 0.61,
+      "scissored": 0.86
+    },
+    "elemental_mu_eV_per_atom": {
+      "Sn": -2166.8575,
+      "Se": -593.4319,
+      "O": -564.9098
+    }
+  },
+  "provenance": {
+    "settings": "PBE-D3, ecutwfc 80 / ecutrho 640, k 2x2x2, spin-polarized",
+    "host_cell": "PBE-D3 relaxed (data/snse_relaxed_pbe_d3.json)",
+    "harvest": "data/stageB_harvest.yaml (Sol prod_final + references, 2026-07-29)",
+    "vbm_note": "true VBM 7.4950 eV (fixed-occupation bulk SCF)",
+    "mu_note": "elemental refs + host bounds from DeltaH_f(SnSe); O held at the O-rich reference",
+    "gap_note": "scissored to experiment 0.86 eV (PBE 0.61 eV); levels stay VBM-referenced",
+    "open": "realized Delta_mu_O(fO2,T) from the workspace CALPHAD oxygen buffer"
+  },
+  "entries": [
+    {
+      "defect": "V_Sn",
+      "charge": 0,
+      "formation_energy_at_vbm_eV": 1.910349,
+      "mu_independent_eV": 2168.767866,
+      "n_i": {
+        "Sn": -1
+      },
+      "image_charge_correction_eV": 0.0,
+      "total_magnetization": null,
+      "note": ""
+    },
+    {
+      "defect": "V_Sn",
+      "charge": -1,
+      "formation_energy_at_vbm_eV": 1.51677,
+      "mu_independent_eV": 2168.374288,
+      "n_i": {
+        "Sn": -1
+      },
+      "image_charge_correction_eV": 0.027424,
+      "total_magnetization": null,
+      "note": ""
+    },
+    {
+      "defect": "V_Sn",
+      "charge": -2,
+      "formation_energy_at_vbm_eV": 1.329753,
+      "mu_independent_eV": 2168.187271,
+      "n_i": {
+        "Sn": -1
+      },
+      "image_charge_correction_eV": 0.109697,
+      "total_magnetization": null,
+      "note": ""
+    },
+    {
+      "defect": "V_Se",
+      "charge": 0,
+      "formation_energy_at_vbm_eV": 2.05307,
+      "mu_independent_eV": 595.484975,
+      "n_i": {
+        "Se": -1
+      },
+      "image_charge_correction_eV": 0.0,
+      "total_magnetization": null,
+      "note": ""
+    },
+    {
+      "defect": "V_Se",
+      "charge": 1,
+      "formation_energy_at_vbm_eV": 1.973236,
+      "mu_independent_eV": 595.405141,
+      "n_i": {
+        "Se": -1
+      },
+      "image_charge_correction_eV": 0.027424,
+      "total_magnetization": null,
+      "note": ""
+    },
+    {
+      "defect": "V_Se",
+      "charge": 2,
+      "formation_energy_at_vbm_eV": 1.613898,
+      "mu_independent_eV": 595.045803,
+      "n_i": {
+        "Se": -1
+      },
+      "image_charge_correction_eV": 0.109697,
+      "total_magnetization": null,
+      "note": ""
+    },
+    {
+      "defect": "O_Se",
+      "charge": 0,
+      "formation_energy_at_vbm_eV": -1.111257,
+      "mu_independent_eV": 27.410811,
+      "n_i": {
+        "O": 1,
+        "Se": -1
+      },
+      "image_charge_correction_eV": 0.0,
+      "total_magnetization": null,
+      "note": ""
+    },
+    {
+      "defect": "O_Se",
+      "charge": -1,
+      "formation_energy_at_vbm_eV": -0.469867,
+      "mu_independent_eV": 28.052201,
+      "n_i": {
+        "O": 1,
+        "Se": -1
+      },
+      "image_charge_correction_eV": 0.027424,
+      "total_magnetization": null,
+      "note": ""
+    },
+    {
+      "defect": "O_Se",
+      "charge": 1,
+      "formation_energy_at_vbm_eV": -0.903035,
+      "mu_independent_eV": 27.619033,
+      "n_i": {
+        "O": 1,
+        "Se": -1
+      },
+      "image_charge_correction_eV": 0.027424,
+      "total_magnetization": null,
+      "note": ""
+    },
+    {
+      "defect": "O_i",
+      "charge": 0,
+      "formation_energy_at_vbm_eV": -0.975145,
+      "mu_independent_eV": -565.884982,
+      "n_i": {
+        "O": 1
+      },
+      "image_charge_correction_eV": 0.0,
+      "total_magnetization": null,
+      "note": "ground-state vdW-gap interstitial"
+    },
+    {
+      "defect": "O_i",
+      "charge": -1,
+      "formation_energy_at_vbm_eV": -0.204997,
+      "mu_independent_eV": -565.114834,
+      "n_i": {
+        "O": 1
+      },
+      "image_charge_correction_eV": 0.027424,
+      "total_magnetization": null,
+      "note": "ground-state vdW-gap interstitial"
+    },
+    {
+      "defect": "O_i",
+      "charge": -2,
+      "formation_energy_at_vbm_eV": 0.192469,
+      "mu_independent_eV": -564.717368,
+      "n_i": {
+        "O": 1
+      },
+      "image_charge_correction_eV": 0.109697,
+      "total_magnetization": null,
+      "note": "ground-state vdW-gap interstitial"
+    },
+    {
+      "defect": "O_i",
+      "charge": 1,
+      "formation_energy_at_vbm_eV": -0.909291,
+      "mu_independent_eV": -565.819128,
+      "n_i": {
+        "O": 1
+      },
+      "image_charge_correction_eV": 0.027424,
+      "total_magnetization": null,
+      "note": "ground-state vdW-gap interstitial"
+    },
+    {
+      "defect": "O_i",
+      "charge": 2,
+      "formation_energy_at_vbm_eV": -0.659787,
+      "mu_independent_eV": -565.569624,
+      "n_i": {
+        "O": 1
+      },
+      "image_charge_correction_eV": 0.109697,
+      "total_magnetization": null,
+      "note": "ground-state vdW-gap interstitial"
+    }
+  ]
+}

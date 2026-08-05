@@ -1,0 +1,42 @@
+# Stage B (prod_final) converged total energies, harvested from Sol 2026-07-23.
+# Full locked settings: PBE-D3, ecutwfc 80 / ecutrho 640, k 2x2x2, spin-polarized defects, relaxed
+# at the fixed PBE-D3 host cell. All entries below are DONE + RELAXED (bulk is a converged SCF).
+# Values are the QE `!  total energy` line in Ry. Source: runs/prod_final/<label>.out (local on Sol).
+# All defects converged NON-magnetic (total magnetization ~0).
+units: Ry
+
+bulk_3x3x1: -7306.06653716        # 72-atom pristine reference (E_bulk)
+fermi_eV: 7.7793                  # OBSOLETE smeared-E_Fermi proxy; superseded by references.vbm_eV
+
+# Reference jobs (runs/references/, converged 2026-07-29) that make the formation energies physical:
+# the true VBM (fixed-occupation bulk SCF) + the elemental chemical-potential references.
+references:
+  vbm_eV: 7.4950                  # TRUE VBM = highest occupied level, fixed-occupation bulk_vbm SCF.
+                                  # Same cell/k as E_bulk (total E matched to 1e-8 Ry). The old proxy
+                                  # sat 0.28 eV too high.
+  elemental_Ry:                   # vc-relaxed elemental ground states, PBE-D3, 80/640. mu_i = E/n.
+    Sn: {E: -637.04436016, n: 4}  # beta-Sn white tin, I4_1/amd   (Sn_bulk.out, 10 steps)
+    Se: {E: -130.84932158, n: 3}  # trigonal gray Se, P3_121      (Se_bulk.out, 16 steps)
+    O:  {E: -83.04021438,  n: 2}  # O2 molecule in a box (settings batch). Plain PBE - D3 ~0 for an
+                                  # isolated bonded O2, so consistent with the PBE-D3 solids to ~meV.
+
+defects:
+  V_Sn:  {0: -7146.66503906, -1: -7146.14510987, -2: -7145.61402996}
+  V_Se:  {0: -7262.29919875, 1: -7262.85795444,  2: -7263.44128454}
+  O_Se:  {0: -7304.05187968, -1: -7303.45588171, 1: -7304.58946365}
+  # O interstitial: three candidate sites at neutral. O_i_2 (vdW gap) is the ground state,
+  # 0.78 eV below O_i_1 and 1.01 eV below O_i_0 at these final settings.
+  O_i_0: {0: -7347.58419604}
+  O_i_1: {0: -7347.60131329}
+  O_i_2: {0: -7347.65831616, -1: -7347.05285466, -2: -7346.47881605, 1: -7348.20636400, 2: -7348.74494503}
+  # ^ full charge ladder converged 2026-07-29 (prod_final 14-17, splice-restarted after a 24h
+  #   timeout; all relaxed=yes/JOB DONE, non-magnetic, each 7-22 meV below its timed-out value).
+
+# stoichiometry: atoms added(+)/removed(-) relative to the perfect 72-atom cell
+n_i:
+  V_Sn:  {Sn: -1}
+  V_Se:  {Se: -1}
+  O_Se:  {O: 1, Se: -1}
+  O_i_0: {O: 1}
+  O_i_1: {O: 1}
+  O_i_2: {O: 1}

@@ -1,0 +1,62 @@
+source: Materials Project
+material_id: mp-691
+pull_date: '2026-07-16'
+formula: SnSe
+spacegroup: Pnma
+lattice:
+  abc:
+  - 4.700907
+  - 4.126251
+  - 11.664459
+  angles:
+  - 90.0
+  - 90.0
+  - 90.0
+volume_A3: 226.256946
+n_sites: 8
+band_gap_pbe_eV: 0.6072
+is_gap_direct: false
+scissor_note: PBE gap underestimates experiment (~0.86 eV). Apply scissor downstream.
+dielectric:
+  total:
+  - - 52.822356
+    - 0.0
+    - 0.0
+  - - 0.0
+    - 46.73283
+    - 0.0
+  - - 0.0
+    - 0.0
+    - 82.491358
+  electronic:
+  - - 26.087935
+    - 0.0
+    - 0.0
+  - - 0.0
+    - 25.045701
+    - 0.0
+  - - 0.0
+    - 0.0
+    - 28.129603
+  ionic:
+  - - 26.734421
+    - 0.0
+    - 0.0
+  - - 0.0
+    - 21.687129
+    - 0.0
+  - - 0.0
+    - 0.0
+    - 54.361755
+  eps_static_scalar: 60.6822
+  eps_inf_scalar: 26.4211
+task_ids:
+  summary: '[''aaafsuub'', ''aaafwfbu'', ''aaacjjek'', ''aaafwfcp'', ''aaaefjvd'',
+    ''aaafwfdd'', ''aaafsumv'', ''aaafwfce'', ''aaafsunh'', ''aaacjvng'', ''aaafwezu'',
+    ''aaadiupo'', ''aaadjtfu'', ''aaadqyjm'', ''aaafwfaa'', ''aaadmpjx'', ''aaaelfwd'',
+    ''aaaekxhm'', ''aaafwfcq'', ''aaafsupa'', ''aaadmiig'', ''aaaenimw'', ''aaafwfbk'',
+    ''aaafsuxj'', ''aaablquy'', ''aaabllkd'', ''aaaezskr'', ''aaafemib'', ''aaaaabap'',
+    ''aaablpra'', ''aaacmwsx'', ''aaafdizp'', ''aaaeukth'', ''aaaezwrq'', ''aaaddzfb'',
+    ''aaafwfcj'', ''aaafsbjz'', ''aaaezyju'', ''aaaemqxp'', ''aaafwfbn'', ''aaabgizo'',
+    ''aaafsusi'', ''aaafwfdk'', ''aaadjoql'', ''aaafmshx'']'
+  dielectric: mp-aaaaabap

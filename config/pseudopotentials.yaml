@@ -1,0 +1,51 @@
+# Pseudopotential set for SnSe:O defects.
+#
+# Source of truth: SSSP (Standard Solid-State Pseudopotentials), PBE, "efficiency" library.
+# We pin the library + version; the exact per-element filename, recommended cutoffs, and md5 come
+# from the SSSP JSON that ships with the library (sssp_efficiency_pbe.json). Do NOT hand-type md5s.
+#
+# Resolution: place the SSSP UPF files + the SSSP JSON in pseudo/, then run
+#   python -m snse_defects.pseudos --resolve
+# which fills in filename/cutoff/md5 below from the JSON and verifies each UPF checksum.
+#
+# The cutoffs here are STARTING points for the convergence sweep, not final values. The supercell
+# cutoff is the max over the elements present. Convergence (runs/convergence/) sets the production
+# cutoffs; whatever it lands on overrides these.
+
+functional: PBE
+# RESOLVED against the actual files on Sol (md5-verified 2026-07-16). Mixed provenance but all PBE
+# and mutually consistent: Se is the standard SSSP GBRV Se (md5 identical to the SSSP record), Sn is
+# a newer GBRV revision (v1.4), O is the pslibrary 1.0.0 PAW reused from the earthcore set. Sn/Se
+# are ultrasoft, O is PAW. Filenames are lowercase (GBRV) - QE on Linux is case-sensitive, so the
+# input files must match exactly.
+source: "GBRV all_pbe_UPF_v1.5 (Sn, Se) + pslibrary O.pbe-n-kjpaw_psl.1.0.0 (earthcore)"
+
+elements:
+  O:
+    filename: O.pbe-n-kjpaw_psl.1.0.0.UPF
+    type: PAW (pslibrary 1.0.0)
+    ecutwfc_Ry: null      # harder PAW than Sn/Se; converge before the (oxygen-bearing) production
+    ecutrho_Ry: null      # cells. SSSP-1.3.0 recommends ~75 Ry for this O - confirm with an O sweep.
+    dual: 8.0
+    md5: e99d9cef9b487d1ca56f5b95ecd0fd7a
+  Sn:
+    filename: sn_pbe_v1.4.uspp.F.UPF
+    type: ultrasoft (GBRV v1.4)
+    ecutwfc_Ry: 60.0
+    ecutrho_Ry: 480.0
+    dual: 8.0
+    md5: 469debedee59599fedebd795477fea03
+  Se:
+    filename: se_pbe_v1.uspp.F.UPF
+    type: ultrasoft (GBRV v1)
+    ecutwfc_Ry: 30.0
+    ecutrho_Ry: 240.0
+    dual: 8.0
+    md5: 1b3568f3a8ae88f9a2a0ad0698632c85
+
+# Convergence batch (bulk SnSe) uses only Sn/Se -> baseline 60/480, confirmed by runs/convergence/.
+# Production adds O (harder) -> the O cutoff, converged separately, may raise ecutwfc above 60.
+production:
+  ecutwfc_Ry: 60.0
+  ecutrho_Ry: 480.0
+  note: "Sn/Se baseline for convergence. Re-check O cutoff before oxygen-bearing production cells."

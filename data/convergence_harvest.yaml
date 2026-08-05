@@ -1,0 +1,33 @@
+# Harvested total energies from the convergence batch (Sol, 2026-07-16), md5-verified pseudopotentials,
+# 8-atom SnSe conventional cell, PBE-D3, 16-core MPI. Values are the QE `!  total energy` line (Ry).
+# Source: runs/convergence/<sweep>/<label>.out (raw outputs local/gitignored on Sol + Windows).
+n_atoms: 8
+
+ecutwfc_sweep:          # ecutrho = 8*ecutwfc, k = 6x6x3
+  40: -811.73595820
+  50: -811.76140543
+  60: -811.77884359
+  70: -811.78031804
+  80: -811.78529464
+
+dual_sweep:             # ecutwfc = 60, ecutrho = dual*60
+  6:  -811.77885797     # rho 360
+  8:  -811.77884359     # rho 480
+  10: -811.77884113     # rho 600
+  12: -811.77883982     # rho 720
+
+kpoint_sweep:           # ecutwfc 60, ecutrho 480
+  "2x2x1": -811.70539807
+  "4x4x2": -811.77946379
+  "6x6x3": -811.77884359
+  "8x8x4": -811.77881212
+
+vc_relax:               # PBE-D3 vc-relax of the bulk (the host cell for defect supercells)
+  lattice_angstrom: [4.578319864, 4.162170567, 11.567296085]
+  volume_A3: 220.42348
+  final_energy_Ry: -811.78094404
+
+# Reference lattices for the vc-relax comparison
+reference_lattices:
+  mp_691_pbe_novdw: [4.700907, 4.126251, 11.664459]   # V 226.26 - the starting (bare PBE) cell
+  experiment_300K:  [4.445, 4.153, 11.501]             # Zhao 2014 / Chattopadhyay 1986, MP-axis order

@@ -1,0 +1,22 @@
+# Settings batch harvest (Sol, 2026-07-17). Fixes the oxygen cutoff and the vdW functional choice.
+# Source: runs/settings/*.out (local/gitignored on Sol).
+
+o2_ecutwfc_sweep:       # isolated O2 molecule (2 atoms), Gamma, triplet; total energy (Ry)
+  60:  -83.03827097
+  70:  -83.03965042
+  80:  -83.04021438
+  90:  -83.04030154
+  100: -83.04032976
+
+# optB88-vdW bulk vc-relax (input_dft=vdW-DF-obk8), finished cleanly (kernel table generated fine)
+optb88_relax:
+  lattice_angstrom: [4.532467617, 4.205225862, 11.759736605]
+  volume_A3: 224.14117
+
+# For the functional comparison (all vs experiment)
+pbe_d3_relax:           # from convergence_harvest.yaml, repeated here for the side-by-side
+  lattice_angstrom: [4.578319864, 4.162170567, 11.567296085]
+  volume_A3: 220.42348
+experiment_300K:
+  lattice_angstrom: [4.445, 4.153, 11.501]
+  volume_A3: 212.31

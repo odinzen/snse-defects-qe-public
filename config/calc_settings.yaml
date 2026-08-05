@@ -1,0 +1,61 @@
+# QE calculation settings for the SnSe:O defect study.
+# These are the knobs the convergence sweep validates; production values get written back here.
+
+functional:
+  # SnSe is a layered van der Waals crystal, so a plain PBE relax will over-expand the interlayer
+  # spacing. Use a vdW-corrected functional and validate the relaxed lattice against MP mp-691.
+  xc: PBE
+  vdw_correction: grimme-d3      # LOCKED. optB88-vdW (vdW-DF-obk8) was tested and lost: larger
+  # volume error (+5.6% vs +3.8%). PBE-D3 keeps b/c within 0.6%. See data/settings_harvest.yaml.
+
+electronic:
+  # LOCKED. O2 cutoff sweep converged at 80 Ry (90 gains only 0.6 meV/atom); this covers oxygen and
+  # Sn/Se. dual 8 confirmed. See runs/settings/ + data/settings_harvest.yaml.
+  ecutwfc_Ry: 80
+  ecutrho_Ry: 640               # dual 8
+  occupations: smearing
+  smearing: gaussian
+  degauss_Ry: 0.005             # SnSe is a small-gap semiconductor; keep smearing small
+  conv_thr: 1.0e-8
+
+kpoints:
+  # Bulk conventional cell: a Monkhorst-Pack grid to converge. Supercell: Gamma or small grid.
+  bulk_grid: [6, 6, 3]          # CONFIRMED converged (0.05 meV/atom vs 8x8x4) in the sweep
+  supercell_grid: [2, 2, 3]     # 6x6x3-equivalent density on the 3x3x1 (72-atom) supercell
+
+relaxation:
+  calculation: vc-relax         # bulk: vc-relax; defects: relax (fixed cell, dilute limit)
+  etot_conv_thr_Ry: 1.0e-4
+  forc_conv_thr_Ry_bohr: 1.0e-3
+  # Defect cells relax ions at FIXED cell (the host cell from the converged bulk).
+
+supercell:
+  # Dilute limit. The conventional cell is 4.70 x 4.13 x 11.66 A - already ~3x longer along c,
+  # so a plain 2x2x2 wastes atoms on a 23 A c-axis while leaving the in-plane images at ~8 A.
+  # These multiples keep the box near-isotropic (~12-15 A each way). structures.py prints the
+  # real min-image distance for each so the choice is grounded, not asserted.
+  host_cell: conventional       # Pnma conventional 8-atom cell (4 Sn + 4 Se) as the tiling unit
+  small: [2, 2, 1]              # 32 atoms - setup smoke + lower size bound
+  production: [3, 3, 1]         # 72 atoms - main cell, most isotropic
+  size_check: [3, 3, 2]         # 144 atoms - doubles the short c-image distance for convergence
+
+# Which Voronoi interstitial candidate is the true ground state. Determined by relaxing all three
+# at neutral (stage A): O_i_2 sits in the WIDER van der Waals interlayer gap (z=0.529) and is
+# 0.53 eV below O_i_0 and 0.37 eV below O_i_1 (both cramped in-layer sites). All three non-magnetic.
+# The charge-state ladder must be built on this site; the O_i_0 ladder is a metastable-site record.
+o_i_ground_site: O_i_2
+
+charge_states:
+  O_i:  [0, -1, -2, 1, 2]
+  O_Se: [0, -1, 1]              # isovalent; wide q unlikely but check -1/+1
+  V_Sn: [0, -1, -2]             # acceptor
+  V_Se: [0, 1, 2]               # donor
+
+correction:
+  scheme: kumagai-oba           # eFNV; falls back to Freysoldt (FNV) for isotropic check
+  # Uses the MP dielectric tensor (config/mp691.yaml). Anisotropic eps -> prefer eFNV.
+
+gap:
+  pbe_gap_eV: 0.61              # MP/PBE, underestimate
+  experimental_gap_eV: 0.86     # scissor target for the carrier model
+  scissor: apply_downstream     # correct transition levels / DOS edge in py-sc-fermi, not in DFT
